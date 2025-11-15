@@ -33,7 +33,7 @@ class App
       env["PATH_INFO"] = normalize_path(env["PATH_INFO"])
 
       return serve_static_file(:openapi, env) if env["PATH_INFO"] == "/openapi.yml"
-      return serve_static_file(:authors, env) if env["PATH_INFO"] == "/AUTHORS"
+      return serve_static_file(:authors, env, "Cache-Control" => "public, max-age=86400") if env["PATH_INFO"] == "/AUTHORS"
 
       response = @auth_route.call(env)
       return response if response
@@ -55,13 +55,13 @@ class App
     path == "/" ? path : path.chomp("/")
   end
 
-  def serve_static_file(type, env)
+  def serve_static_file(type, env, headers = {})
     file_path = STATIC_FILES[type]
     if File.exist?(file_path)
       LOG.info "Serving static file: #{file_path}"
       [
         200,
-        { "Content-Type" => "text/plain", "Cache-Control" => "no-store" },
+        { "Content-Type" => "text/plain" }.merge(headers),
         [File.read(file_path)]
       ]
     else
