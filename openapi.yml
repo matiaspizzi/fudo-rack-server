@@ -11,6 +11,46 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "producto"
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-11-15 03:33:42 +0000"
+
+    ProductListResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            page_size:
+              type: integer
+              example: 30
+            total_count:
+              type: integer
+              example: 54
+
+    ProductResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Product'
+
 security:
   - BearerAuth: []
 
@@ -94,21 +134,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  products:
-                    type: array
-                    items:
-                      type: object
-                  pagination:
-                    type: object
-                    properties:
-                      offset:
-                        type: integer
-                      page_size:
-                        type: integer
-                      total_count:
-                        type: integer
+                $ref: '#/components/schemas/ProductListResponse'
         "400":
           description: Invalid pagination parameters.
         "401":
@@ -160,7 +186,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/ProductResponse'
         "404":
           description: Product not found.
         "400":
