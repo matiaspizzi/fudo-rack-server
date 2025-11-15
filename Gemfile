@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem "rack", "~> 2.2"
+gem "jwt", "~> 2.6"
+gem "puma", "~> 6.0"
+gem "pg", "~> 1.4"
+gem "bcrypt", "~> 3.1"
+gem "dotenv", "~> 2.7"
+gem "logger", "~> 1.4"
+gem "sequel", "~> 5.48"

@@ -1,0 +1,33 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    base64 (0.3.0)
+    bcrypt (3.1.20)
+    bigdecimal (3.3.1)
+    dotenv (2.8.1)
+    jwt (2.10.2)
+      base64
+    logger (1.7.0)
+    nio4r (2.7.5)
+    pg (1.6.2-x64-mingw-ucrt)
+    puma (6.6.1)
+      nio4r (~> 2.0)
+    rack (2.2.21)
+    sequel (5.98.0)
+      bigdecimal
+
+PLATFORMS
+  x64-mingw-ucrt
+
+DEPENDENCIES
+  bcrypt (~> 3.1)
+  dotenv (~> 2.7)
+  jwt (~> 2.6)
+  logger (~> 1.4)
+  pg (~> 1.4)
+  puma (~> 6.0)
+  rack (~> 2.2)
+  sequel (~> 5.48)
+
+BUNDLED WITH
+   2.6.9
